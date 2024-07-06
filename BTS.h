@@ -2,7 +2,7 @@
 #pragma once
 class BTS
 {
-    short R_EN,L_EN,RPWM,LPWM;
+    short RPWM,LPWM;
     double CurrentPercent=0;
     short RoundedCurrentPercent=0;
     short CurrentPwm=0;
@@ -42,23 +42,16 @@ class BTS
     }
     
 public:
-    void Begin(short r_en,short l_en,short rpwm,short lpwm)
+    void Begin(short rpwm,short lpwm)
     {
-        R_EN = r_en;
-        L_EN = l_en;
         RPWM=rpwm;
         LPWM=lpwm;
-        pinMode(R_EN,OUTPUT);
-        pinMode(L_EN,OUTPUT);
         pinMode(RPWM,OUTPUT);
         pinMode(LPWM,OUTPUT);
     }
 
     void Rotate(double percent)
     {
-      digitalWrite(R_EN,1);
-      digitalWrite(L_EN,1);
-
       CurrentPercent=percent;
       RoundedCurrentPercent=round(percent);
       CurrentPwm=ToPWM(RoundedCurrentPercent);
@@ -73,9 +66,9 @@ public:
     }
     
 
-    void Rotate(short percent,double acceleration)
+    void Rotate(double percent,double acceleration)
     {
-      if(percent==RoundedCurrentPercent)
+      if(percent==CurrentPercent)
       {
         return;
       }
