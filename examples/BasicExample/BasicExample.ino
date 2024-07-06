@@ -5,7 +5,7 @@ int PowerPercent=50; // 50% of power
 BTS TestMotor;
 
 void setup() {
-  TestMotor.Begin(2,3,5,6); // in this order r_en,l_en,rpwm,lpwm
+  TestMotor.Begin(5,6); // in this order rpwm,lpwm
 }
 void loop() {
   TestMotor.Rotate(PowerPercent); // this line make motor work with 50% of power
